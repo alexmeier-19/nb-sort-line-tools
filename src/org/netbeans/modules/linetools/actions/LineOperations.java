@@ -68,7 +68,7 @@ import org.openide.NotifyDescriptor;
 import org.openide.windows.IOProvider;
 import org.openide.windows.InputOutput;
 
-/**
+/**o
  *
  * @author Sandip V. Chitale (Sandip.Chitale@Sun.Com)
  * @author markiewb@netbeans.org (applied fixes)
@@ -81,8 +81,10 @@ public final class LineOperations {
     public static final String FILE_SEPARATOR_DOT = File.separatorChar + DOT;
     public static final String FILE_SEPARATOR_DOT_DASH = FILE_SEPARATOR_DOT + DASH;
     public static final String FILE_SEPARATORS_DOT_DASH = FILE_SEPARATORS + DOT + DASH;
-    private static final Comparator<String> REVERSE_STRING_COMPARATOR = Collections.reverseOrder();
-    private static final Comparator<String> REVERSE_STRING_COMPARATOR_CASE_INSENSITIVE = Collections.reverseOrder(String.CASE_INSENSITIVE_ORDER);
+    private static final Comparator<String> STRING_COMPARATOR = new CustomNaturalOrderComparator();
+    private static final Comparator<String> REVERSE_STRING_COMPARATOR = Collections.reverseOrder(new CustomNaturalOrderComparator());
+    private static final Comparator<String> STRING_COMPARATOR_CASE_INSENSITIVE = new CustomNaturalOrderComparator(false);
+    private static final Comparator<String> REVERSE_STRING_COMPARATOR_CASE_INSENSITIVE = Collections.reverseOrder(new CustomNaturalOrderComparator(false));
 
     private static volatile boolean removeDuplicateLines;
     private static volatile boolean matchCase = true;
@@ -780,8 +782,9 @@ public final class LineOperations {
                 }
             } else {
                 if (matchCase) {
+                    comparator = STRING_COMPARATOR;
                 } else {
-                    comparator = String.CASE_INSENSITIVE_ORDER;
+                    comparator = STRING_COMPARATOR_CASE_INSENSITIVE;
                 }
             }
             return comparator;
