@@ -51,6 +51,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -81,10 +82,10 @@ public final class LineOperations {
     public static final String FILE_SEPARATOR_DOT = File.separatorChar + DOT;
     public static final String FILE_SEPARATOR_DOT_DASH = FILE_SEPARATOR_DOT + DASH;
     public static final String FILE_SEPARATORS_DOT_DASH = FILE_SEPARATORS + DOT + DASH;
-    private static final Comparator<String> STRING_COMPARATOR = new CustomNaturalOrderComparator();
-    private static final Comparator<String> REVERSE_STRING_COMPARATOR = Collections.reverseOrder(new CustomNaturalOrderComparator());
-    private static final Comparator<String> STRING_COMPARATOR_CASE_INSENSITIVE = new CustomNaturalOrderComparator(false);
-    private static final Comparator<String> REVERSE_STRING_COMPARATOR_CASE_INSENSITIVE = Collections.reverseOrder(new CustomNaturalOrderComparator(false));
+    private static final Comparator<String> STRING_COMPARATOR = new CustomComparator(Locale.ENGLISH);
+    private static final Comparator<String> REVERSE_STRING_COMPARATOR = Collections.reverseOrder(new CustomComparator(Locale.ENGLISH));
+    private static final Comparator<String> STRING_COMPARATOR_CASE_INSENSITIVE = new CustomComparator(Locale.ENGLISH, false);
+    private static final Comparator<String> REVERSE_STRING_COMPARATOR_CASE_INSENSITIVE = Collections.reverseOrder(new CustomComparator(Locale.ENGLISH, false));
 
     private static volatile boolean removeDuplicateLines;
     private static volatile boolean matchCase = true;

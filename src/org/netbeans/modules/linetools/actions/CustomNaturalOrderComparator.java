@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  *
- * @author meie03
+ * @author Alex Meier
  */
 public class CustomNaturalOrderComparator implements Comparator<String>
 {
